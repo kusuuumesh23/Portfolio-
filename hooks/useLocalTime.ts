@@ -11,7 +11,7 @@ export interface LocalTimeData {
 const emptySubscribe = () => () => {};
 
 function subscribeTime(callback: () => void) {
-  const interval = setInterval(callback, 1000);
+  const interval = setInterval(callback, 10000);
   return () => clearInterval(interval);
 }
 

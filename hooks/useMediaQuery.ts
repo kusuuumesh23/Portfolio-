@@ -1,26 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore, useCallback } from "react";
 
 /**
- * Custom hook to subscribe to CSS media queries with SSR safety.
+ * Custom hook to subscribe to CSS media queries with SSR safety and zero cascading renders.
  */
 export function useMediaQuery(query: string, defaultValue = false): boolean {
-  const [matches, setMatches] = useState<boolean>(defaultValue);
+  const subscribe = useCallback(
+    (callback: () => void) => {
+      if (typeof window === "undefined") return () => {};
+      const media = window.matchMedia(query);
+      media.addEventListener("change", callback);
+      return () => media.removeEventListener("change", callback);
+    },
+    [query]
+  );
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const mediaQueryList = window.matchMedia(query);
-    const updateMatch = () => setMatches(mediaQueryList.matches);
-
-    // Initial check
-    updateMatch();
-
-    // Event listener
-    mediaQueryList.addEventListener("change", updateMatch);
-    return () => mediaQueryList.removeEventListener("change", updateMatch);
+  const getSnapshot = useCallback(() => {
+    return window.matchMedia(query).matches;
   }, [query]);
 
-  return matches;
+  const getServerSnapshot = useCallback(() => {
+    return defaultValue;
+  }, [defaultValue]);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }

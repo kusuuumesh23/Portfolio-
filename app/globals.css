@@ -160,4 +160,32 @@ body {
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+
+  @keyframes heroReveal {
+    from {
+      transform: translateY(105%);
+      opacity: 0.85;
+    }
+    to {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+
+  .hero-line-1 {
+    animation: heroReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+  }
+
+  .hero-line-2 {
+    animation: heroReveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-line-1,
+    .hero-line-2 {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
+  }
 }

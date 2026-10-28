@@ -12,6 +12,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { useIsTouch } from "@/hooks/useIsTouch";
 
 // Register ScrollTrigger once safely on client
 if (typeof window !== "undefined") {
@@ -48,11 +49,12 @@ export function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   const prefersReducedMotion = useReducedMotion();
+  const isTouch = useIsTouch();
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // If reduced motion is requested, do not run smooth scroll engine
-    if (prefersReducedMotion || typeof window === "undefined") {
+    // If reduced motion is requested or coarse touch device, do not run smooth scroll engine
+    if (prefersReducedMotion || isTouch || typeof window === "undefined") {
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;
@@ -95,7 +97,7 @@ export function SmoothScrollProvider({
       lenis.destroy();
       lenisRef.current = null;
     };
-  }, [prefersReducedMotion]);
+  }, [prefersReducedMotion, isTouch]);
 
   const scrollTo = useCallback(
     (target: string | number | HTMLElement, options?: ScrollToOptions) => {

@@ -24,7 +24,7 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -72,6 +72,9 @@ export const metadata: Metadata = {
     images: ["/og"],
     creator: "@kusumesh",
   },
+  alternates: {
+    canonical: siteConfig.seo.siteUrl,
+  },
   robots: {
     index: true,
     follow: true,
@@ -98,6 +101,29 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    url: siteConfig.seo.siteUrl,
+    jobTitle: siteConfig.role,
+    description: siteConfig.seo.description,
+    alumniOf: {
+      "@type": "EducationalOrganization",
+      name: siteConfig.education.institution,
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: siteConfig.location.split(",")[0]?.trim(),
+      addressCountry: "India",
+    },
+    sameAs: [
+      siteConfig.socials.github,
+      siteConfig.socials.linkedin,
+      siteConfig.socials.twitter,
+    ],
+  };
+
   return (
     <html
       lang="en"
@@ -106,6 +132,10 @@ export default function RootLayout({
     >
       <head>
         <ThemeScript />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-screen bg-bg text-text transition-colors duration-150">
         <a

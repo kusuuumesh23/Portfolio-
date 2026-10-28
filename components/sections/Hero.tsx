@@ -11,7 +11,7 @@ import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useIsTouch } from "@/hooks/useIsTouch";
 import { useSmoothScroll } from "@/components/motion/SmoothScrollProvider";
 import { MagneticButton } from "@/components/motion/MagneticButton";
-import { EASINGS, SPRINGS } from "@/lib/motion";
+import { SPRINGS } from "@/lib/motion";
 import { ArrowDown } from "lucide-react";
 
 if (typeof window !== "undefined") {
@@ -109,24 +109,14 @@ export function Hero() {
       {/* Top Meta Bar */}
       <div className="flex flex-wrap items-center justify-between gap-4 text-xs font-mono uppercase text-muted">
         {/* Intro */}
-        <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: EASINGS.editorial }}
-          className="flex items-center gap-3"
-        >
+        <div className="flex items-center gap-3">
           <span className="text-accent font-medium">{siteConfig.heroIntro}</span>
           <span className="h-px w-6 bg-border" />
           <span className="hidden sm:inline">{siteConfig.role}</span>
-        </motion.div>
+        </div>
 
         {/* Live Local Time & Availability */}
-        <motion.div
-          initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2, ease: EASINGS.editorial }}
-          className="flex items-center gap-4 sm:gap-6"
-        >
+        <div className="flex items-center gap-4 sm:gap-6">
           {/* Availability indicator with opacity-only pulse */}
           <div className="flex items-center gap-2">
             <span
@@ -146,7 +136,7 @@ export function Hero() {
               {siteConfig.location.split(",")[0]}
             </span>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Center: Massive Editorial Headline & Narrative */}
@@ -165,88 +155,35 @@ export function Hero() {
           >
             {/* Line 1: CREATIVE */}
             <span className="block overflow-hidden">
-              <motion.span
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 1, y: "0%" }
-                    : { y: "105%", opacity: 0.2 }
-                }
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{
-                  duration: 0.85,
-                  delay: 0.2,
-                  ease: EASINGS.reveal,
-                }}
-                className="block"
-              >
+              <span className="block hero-line-1">
                 {siteConfig.headlinePrimary}
-              </motion.span>
+              </span>
             </span>
 
             {/* Line 2: DEVELOPER. */}
             <span className="block overflow-hidden">
-              <motion.span
-                initial={
-                  prefersReducedMotion
-                    ? { opacity: 1, y: "0%" }
-                    : { y: "105%", opacity: 0.2 }
-                }
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{
-                  duration: 0.85,
-                  delay: 0.35,
-                  ease: EASINGS.reveal,
-                }}
-                className="block text-muted hover:text-text transition-colors duration-300"
-              >
+              <span className="block hero-line-2 text-muted hover:text-text transition-colors duration-300">
                 {siteConfig.headlineSecondary}
-              </motion.span>
+              </span>
             </span>
           </h1>
         </motion.div>
 
         {/* Supporting Line & Status */}
         <div className="mt-8 md:mt-12 max-w-2xl">
-          <motion.p
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.65,
-              delay: 0.55,
-              ease: EASINGS.editorial,
-            }}
-            className="body-lg text-muted mb-6"
-          >
+          <p className="body-lg text-muted mb-6">
             {siteConfig.statement}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{
-              duration: 0.65,
-              delay: 0.75,
-              ease: EASINGS.editorial,
-            }}
-            className="flex items-center gap-3 text-xs font-mono text-muted"
-          >
+          <div className="flex items-center gap-3 text-xs font-mono text-muted">
             <span className="text-accent font-medium">Currently:</span>
             <span className="text-text">{siteConfig.status}</span>
-          </motion.div>
+          </div>
         </div>
       </div>
 
       {/* Bottom Action Bar */}
-      <motion.div
-        initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: 0.6,
-          delay: 0.9,
-          ease: EASINGS.editorial,
-        }}
-        className="flex items-end justify-between border-t border-border pt-6 gap-6"
-      >
+      <div className="flex items-end justify-between border-t border-border pt-6 gap-6">
         {/* Magnetic Button to Contact Section */}
         <div className="flex items-center gap-4">
           <MagneticButton
@@ -287,7 +224,7 @@ export function Hero() {
             <ArrowDown className="h-3.5 w-3.5 text-accent group-hover:text-text transition-colors" />
           </motion.span>
         </button>
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -127,7 +127,7 @@ export function About() {
                 src="/images/profile.jpg"
                 alt={`${siteConfig.name} - ${siteConfig.role}`}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 380px"
+                sizes="(max-width: 768px) 384px, (max-width: 1200px) 40vw, 384px"
                 className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
                 priority={false}
               />

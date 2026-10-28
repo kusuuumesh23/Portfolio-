@@ -28,7 +28,7 @@ export function Footer() {
         </div>
 
         {/* Center: Live Local Time */}
-        <div className="flex items-center gap-2 select-none" aria-label={`Current local time in ${siteConfig.location}`}>
+        <div className="flex items-center gap-2 select-none">
           <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" aria-hidden="true" />
           <span className="uppercase text-muted/80">{siteConfig.location.split(",")[0]}:</span>
           <span className="text-text font-medium tabular-nums">

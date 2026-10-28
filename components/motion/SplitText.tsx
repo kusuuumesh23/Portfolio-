@@ -68,7 +68,8 @@ export function SplitText({
   };
 
   return (
-    <Component className={className} aria-label={fullText}>
+    <Component className={className}>
+      <span className="sr-only">{fullText}</span>
       <motion.span
         className="inline"
         variants={containerVariants}

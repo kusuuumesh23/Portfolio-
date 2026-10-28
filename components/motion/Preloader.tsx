@@ -43,7 +43,7 @@ export function Preloader({ onComplete, forceShow = false }: PreloaderProps) {
     }
 
     const startTime = performance.now();
-    const durationMs = 850;
+    const durationMs = 180;
 
     let animId: number;
     let timerId: NodeJS.Timeout;
@@ -64,7 +64,7 @@ export function Preloader({ onComplete, forceShow = false }: PreloaderProps) {
           }
           setIsDismissed(true);
           onComplete?.();
-        }, 150);
+        }, 20);
       }
     };
 
@@ -86,8 +86,9 @@ export function Preloader({ onComplete, forceShow = false }: PreloaderProps) {
         initial={{ opacity: 1, y: "0%" }}
         exit={{
           y: "-100%",
+          opacity: 0,
           transition: {
-            duration: 0.65,
+            duration: 0.22,
             ease: EASINGS.reveal,
           },
         }}
