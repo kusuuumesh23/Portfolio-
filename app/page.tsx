@@ -2,7 +2,6 @@
 
 import React from "react";
 import { siteConfig } from "@/data/site";
-import { projects } from "@/data/projects";
 import { skillCategories } from "@/data/skills";
 import { experiences } from "@/data/experience";
 import { Navbar } from "@/components/layout/Navbar";
@@ -14,6 +13,7 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
+import { Projects } from "@/components/sections/Projects";
 
 export default function Home() {
   return (
@@ -24,45 +24,7 @@ export default function Home() {
       <main id="main-content" className="flex-1 flex flex-col">
         <Hero />
         <About />
-
-        {/* SECTION: PROJECTS */}
-        <section
-          id="projects"
-          className="min-h-[80vh] flex flex-col justify-center px-6 md:px-12 max-w-5xl mx-auto w-full py-20 border-t border-border"
-        >
-          <SectionHeader
-            number="02"
-            title="SELECTED WORK."
-            category="Engineering Portfolio"
-          />
-
-          <Reveal direction="up" distance={30}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {projects.map((p, idx) => (
-                <div
-                  key={p.slug}
-                  data-cursor-text="VIEW"
-                  className="border border-border p-6 flex flex-col justify-between hover:border-text transition-colors bg-surface-subtle/20"
-                >
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-muted mb-2">
-                      <span>0{idx + 1}</span>
-                      <span>{p.year}</span>
-                    </div>
-                    <h3 className="heading-sm text-text mb-2">{p.title}</h3>
-                    <p className="body-sm text-muted mb-6">{p.description}</p>
-                  </div>
-                  <div className="border-t border-border pt-4 flex items-center justify-between text-xs font-mono">
-                    <span className="text-muted">{p.stack.slice(0, 2).join(", ")}</span>
-                    <AnimatedLink href={p.githubUrl} external>
-                      Source &rarr;
-                    </AnimatedLink>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </section>
+        <Projects />
 
         {/* SECTION: EXPERIENCE */}
         <section
