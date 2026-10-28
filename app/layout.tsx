@@ -4,6 +4,9 @@ import "./globals.css";
 import { siteConfig } from "@/data/site";
 import { ThemeProvider, ThemeScript } from "@/components/ui/ThemeProvider";
 import { GrainOverlay } from "@/components/ui/GrainOverlay";
+import { SmoothScrollProvider } from "@/components/motion/SmoothScrollProvider";
+import { CursorProvider } from "@/components/motion/CursorContext";
+import { CustomCursor } from "@/components/motion/CustomCursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -112,10 +115,15 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider>
-          <GrainOverlay />
-          <div className="relative flex min-h-screen flex-col">
-            {children}
-          </div>
+          <SmoothScrollProvider>
+            <CursorProvider>
+              <CustomCursor />
+              <GrainOverlay />
+              <div className="relative flex min-h-screen flex-col">
+                {children}
+              </div>
+            </CursorProvider>
+          </SmoothScrollProvider>
         </ThemeProvider>
       </body>
     </html>
