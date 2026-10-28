@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -191,8 +192,8 @@ export function Projects() {
           const isEven = idx % 2 === 0;
           const aspectClass = ASPECT_RATIOS[idx % ASPECT_RATIOS.length];
           const formattedIndex = String(idx + 1).padStart(2, "0");
-          // Linked to project.liveUrl until /projects/[slug] route is built in Phase 8
-          const targetUrl = project.liveUrl;
+          // Linked to internal dynamic case study route /projects/[slug]
+          const targetUrl = `/projects/${project.slug}`;
 
           return (
             <article
@@ -229,11 +230,9 @@ export function Projects() {
 
                   {/* Animated Title */}
                   <div className="project-meta-item">
-                    <a
+                    <Link
                       href={targetUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${project.title} live project (opens in new tab)`}
+                      aria-label={`View ${project.title} case study`}
                       className="group/title inline-flex items-center gap-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-medium tracking-tight text-text hover:text-accent transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-accent"
                     >
                       <span className="transition-transform duration-300 group-hover/title:translate-x-2">
@@ -244,7 +243,7 @@ export function Projects() {
                         aria-hidden="true"
                         className="opacity-0 -translate-x-2 translate-y-2 group-hover/title:opacity-100 group-hover/title:translate-x-0 group-hover/title:translate-y-0 transition-all duration-300 text-accent flex-shrink-0"
                       />
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Short Description */}
@@ -303,11 +302,9 @@ export function Projects() {
                       : "lg:col-span-7 lg:order-1"
                   }`}
                 >
-                  <a
+                  <Link
                     href={targetUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.title} preview (opens in new tab)`}
+                    aria-label={`View ${project.title} case study`}
                     className="block focus-visible:outline-2 focus-visible:outline-accent rounded-[10px]"
                   >
                     <ProjectImage
@@ -315,7 +312,7 @@ export function Projects() {
                       priority={idx === 0}
                       aspectClass={aspectClass}
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </article>
