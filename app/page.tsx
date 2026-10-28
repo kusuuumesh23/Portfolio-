@@ -7,11 +7,12 @@ import { skillCategories } from "@/data/skills";
 import { experiences } from "@/data/experience";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/motion/Preloader";
-import { SplitText } from "@/components/motion/SplitText";
 import { AnimatedLink } from "@/components/motion/AnimatedLink";
 import { Reveal } from "@/components/motion/Reveal";
 import { SectionHeader } from "@/components/motion/SectionHeader";
 import { MagneticButton } from "@/components/motion/MagneticButton";
+
+import { Hero } from "@/components/sections/Hero";
 
 export default function Home() {
   return (
@@ -19,51 +20,8 @@ export default function Home() {
       <Preloader />
       <Navbar />
 
-      <main id="main-content" className="flex-1 flex flex-col pt-24 md:pt-32">
-        {/* SECTION: HOME */}
-        <section
-          id="home"
-          className="min-h-[85vh] flex flex-col justify-center px-6 md:px-12 max-w-5xl mx-auto w-full py-16"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="label-mono text-accent">{siteConfig.heroIntro}</span>
-            <span className="h-px w-8 bg-border" />
-            <span className="text-xs font-mono text-muted">{siteConfig.location}</span>
-          </div>
-
-          <h1 className="display-2xl text-text mb-6">
-            <SplitText type="words" variant="mask-reveal">
-              {`${siteConfig.headlinePrimary} ${siteConfig.headlineSecondary}`}
-            </SplitText>
-          </h1>
-
-          <p className="body-lg text-muted max-w-2xl mb-8">
-            {siteConfig.statement}
-          </p>
-
-          <div className="flex flex-wrap items-center gap-6 text-sm text-muted border-t border-b border-border py-4 mb-8">
-            <div>
-              <span className="text-xs font-mono uppercase text-muted block mb-0.5">Role</span>
-              <span className="text-text font-medium">{siteConfig.role}</span>
-            </div>
-            <div className="h-8 w-px bg-border hidden sm:block" />
-            <div>
-              <span className="text-xs font-mono uppercase text-muted block mb-0.5">Education</span>
-              <span className="text-text font-medium">{siteConfig.education.institution}</span>
-            </div>
-            <div className="h-8 w-px bg-border hidden sm:block" />
-            <div>
-              <span className="text-xs font-mono uppercase text-muted block mb-0.5">Status</span>
-              <span className="text-text font-medium">{siteConfig.status}</span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <AnimatedLink href="/dev" className="text-xs font-mono text-accent">
-              Explore Motion Infrastructure Lab (/dev) &rarr;
-            </AnimatedLink>
-          </div>
-        </section>
+      <main id="main-content" className="flex-1 flex flex-col">
+        <Hero />
 
         {/* SECTION: ABOUT */}
         <section

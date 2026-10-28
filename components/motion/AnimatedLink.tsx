@@ -48,12 +48,10 @@ export function AnimatedLink({
       {!prefersReducedMotion && (
         <motion.span
           aria-hidden="true"
+          style={{ transformOrigin: origin === "left" ? "left" : "right" }}
           className={`absolute bottom-0 left-0 h-[1.5px] w-full ${underlineClassName} pointer-events-none`}
           initial={{ scaleX: 0 }}
-          animate={{
-            scaleX: isHovered ? 1 : 0,
-            transformOrigin: origin === "left" ? "left center" : "right center",
-          }}
+          animate={{ scaleX: isHovered ? 1 : 0 }}
           transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
         />
       )}
