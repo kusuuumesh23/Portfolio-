@@ -13,6 +13,7 @@ import { SectionHeader } from "@/components/motion/SectionHeader";
 import { MagneticButton } from "@/components/motion/MagneticButton";
 
 import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
 
 export default function Home() {
   return (
@@ -22,49 +23,7 @@ export default function Home() {
 
       <main id="main-content" className="flex-1 flex flex-col">
         <Hero />
-
-        {/* SECTION: ABOUT */}
-        <section
-          id="about"
-          className="min-h-[70vh] flex flex-col justify-center px-6 md:px-12 max-w-5xl mx-auto w-full py-20 border-t border-border"
-        >
-          <SectionHeader
-            number="01"
-            title="MORE THAN / JUST CODE."
-            category="About Kusumesh"
-          />
-
-          <Reveal direction="up" distance={25}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-muted">
-              <div>
-                <p className="body-lg text-text mb-4">
-                  {siteConfig.bio[0]}
-                </p>
-                <p className="body-base">
-                  {siteConfig.bio[1]}
-                </p>
-              </div>
-
-              <div className="border border-border p-6 bg-surface-subtle/30">
-                <div className="label-mono text-muted mb-4">Core Philosophy</div>
-                <ul className="space-y-3 text-xs font-mono text-muted">
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    <span>Editorial restraint over sensory overload</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    <span>Every motion serves comprehension and hierarchy</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                    <span>Accessible, keyboard-first, and zero layout shifts</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </Reveal>
-        </section>
+        <About />
 
         {/* SECTION: PROJECTS */}
         <section

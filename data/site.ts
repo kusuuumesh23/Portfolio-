@@ -13,6 +13,13 @@ export interface SiteConfig {
   headlineSecondary: string;
   statement: string;
   bio: string[];
+  about: {
+    lead: string;
+    background: string;
+    interests: string;
+    approach: string;
+    technologies: { name: string; category: string }[];
+  };
   email: string;
   location: string;
   timezone: string;
@@ -49,6 +56,25 @@ export const siteConfig: SiteConfig = {
     "I'm a first-year student exploring the intersection of modern frontend engineering, typography, and interactive motion systems. [EDIT ME]",
     "Focusing on clean software architecture, craft, and building web products that feel tactile and responsive. [EDIT ME]",
   ],
+  about: {
+    lead: "Currently in my first year at Newton School of Technology, focusing on building high-fidelity web experiences that combine engineering discipline with editorial typography and fluid motion. [EDIT ME]",
+    background:
+      "Stepping into computer science with an obsession for how software feels. Spending late nights studying browser rendering pipelines, component architecture, and the mathematics behind spring physics and scroll interpolation. [EDIT ME]",
+    interests:
+      "Deeply interested in modern design engineering, micro-interactions, low-latency interfaces, and creating digital products where every detail feels deliberate rather than accidental. [EDIT ME]",
+    approach:
+      "I prioritize restraint over sensory overload: solid token palettes, semantic markup, full keyboard navigability, zero layout shifts, and purposeful motion that informs rather than distracts. [EDIT ME]",
+    technologies: [
+      { name: "TypeScript", category: "Core" },
+      { name: "React 19", category: "Framework" },
+      { name: "Next.js 16", category: "App Router" },
+      { name: "Tailwind CSS", category: "Design Tokens" },
+      { name: "GSAP + ScrollTrigger", category: "Motion" },
+      { name: "Motion for React", category: "Spring Physics" },
+      { name: "Lenis", category: "Smooth Scroll" },
+      { name: "Web APIs & a11y", category: "Standards" },
+    ],
+  },
   email: "kusumesh.talokar@example.com [EDIT ME]",
   location: "Pune, India [EDIT ME]",
   timezone: "Asia/Kolkata [EDIT ME]",
