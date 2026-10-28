@@ -2,8 +2,6 @@
 
 import React from "react";
 import { siteConfig } from "@/data/site";
-import { skillCategories } from "@/data/skills";
-import { experiences } from "@/data/experience";
 import { Navbar } from "@/components/layout/Navbar";
 import { Preloader } from "@/components/motion/Preloader";
 import { AnimatedLink } from "@/components/motion/AnimatedLink";
@@ -14,6 +12,8 @@ import { MagneticButton } from "@/components/motion/MagneticButton";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Projects } from "@/components/sections/Projects";
+import { Skills } from "@/components/sections/Skills";
+import { Experience } from "@/components/sections/Experience";
 
 export default function Home() {
   return (
@@ -25,55 +25,8 @@ export default function Home() {
         <Hero />
         <About />
         <Projects />
-
-        {/* SECTION: EXPERIENCE */}
-        <section
-          id="experience"
-          className="min-h-[75vh] flex flex-col justify-center px-6 md:px-12 max-w-5xl mx-auto w-full py-20 border-t border-border"
-        >
-          <SectionHeader
-            number="03"
-            title="TOOLS & JOURNEY."
-            category="Background"
-          />
-
-          <Reveal direction="up" distance={30}>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Skills */}
-              <div className="border border-border p-6">
-                <div className="label-mono text-muted mb-4">Tools of the Trade</div>
-                <div className="space-y-4">
-                  {skillCategories.map((c) => (
-                    <div key={c.id}>
-                      <span className="text-xs font-mono uppercase text-accent block mb-1">
-                        {c.name}
-                      </span>
-                      <p className="text-sm text-text">
-                        {c.skills.map((s) => s.name).join(" · ")}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Experience timeline */}
-              <div className="border border-border p-6">
-                <div className="label-mono text-muted mb-4">Milestones & Education</div>
-                <div className="space-y-4">
-                  {experiences.map((e) => (
-                    <div key={e.id} className="border-b border-border last:border-b-0 pb-3 last:pb-0">
-                      <div className="flex items-center justify-between text-xs font-mono text-muted mb-1">
-                        <span className="text-text font-medium">{e.title}</span>
-                        <span>{e.year}</span>
-                      </div>
-                      <p className="text-xs text-muted font-mono">{e.place}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Reveal>
-        </section>
+        <Skills />
+        <Experience />
 
         {/* SECTION: CONTACT */}
         <section
@@ -81,7 +34,7 @@ export default function Home() {
           className="min-h-[70vh] flex flex-col justify-center px-6 md:px-12 max-w-5xl mx-auto w-full py-24 border-t border-border"
         >
           <SectionHeader
-            number="04"
+            number="05"
             title={"LET'S BUILD\nSOMETHING."}
             category="Inquiries"
           />
