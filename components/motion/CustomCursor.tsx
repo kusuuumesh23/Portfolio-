@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { motion, useSpring } from "motion/react";
+import React, { useEffect, useState } from "react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { useCursor } from "./CursorContext";
 import { SPRINGS } from "@/lib/motion";
 
 export function CustomCursor() {
   const { cursorState, isAvailable } = useCursor();
+  const [hasMoved, setHasMoved] = useState(false);
+  const [isInViewport, setIsInViewport] = useState(true);
 
-  // Snappy spring for the center dot
-  const dotX = useSpring(-100, SPRINGS.cursorDot);
-  const dotY = useSpring(-100, SPRINGS.cursorDot);
+  // Direct 1:1 hardware tracking for the center dot (zero lag, zero waving)
+  const dotX = useMotionValue(-100);
+  const dotY = useMotionValue(-100);
 
-  // Smooth floating spring for follower ring/pill
+  // Smooth, critically damped spring for follower ring/pill (no oscillating wave)
   const followerX = useSpring(-100, SPRINGS.cursorFollower);
   const followerY = useSpring(-100, SPRINGS.cursorFollower);
 
@@ -20,19 +22,37 @@ export function CustomCursor() {
     if (!isAvailable || typeof window === "undefined") return;
 
     const onMouseMove = (e: MouseEvent) => {
+      if (!hasMoved) setHasMoved(true);
+      if (!isInViewport) setIsInViewport(true);
+
       dotX.set(e.clientX);
       dotY.set(e.clientY);
       followerX.set(e.clientX);
       followerY.set(e.clientY);
     };
 
+    const onMouseLeave = () => {
+      setIsInViewport(false);
+    };
+
+    const onMouseEnter = () => {
+      setIsInViewport(true);
+    };
+
     window.addEventListener("mousemove", onMouseMove, { passive: true });
-    return () => window.removeEventListener("mousemove", onMouseMove);
-  }, [isAvailable, dotX, dotY, followerX, followerY]);
+    document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("mouseenter", onMouseEnter);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mouseenter", onMouseEnter);
+    };
+  }, [isAvailable, hasMoved, isInViewport, dotX, dotY, followerX, followerY]);
 
   if (!isAvailable) return null;
 
-  const isHidden = cursorState.variant === "hidden";
+  const isHidden = cursorState.variant === "hidden" || !hasMoved || !isInViewport;
   const isHover = cursorState.variant === "hover";
   const isText = cursorState.variant === "text";
 
@@ -41,7 +61,7 @@ export function CustomCursor() {
       aria-hidden="true"
       className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden select-none"
     >
-      {/* Small center dot */}
+      {/* Small center dot (direct 1:1 tracking) */}
       <motion.div
         style={{
           x: dotX,
@@ -63,7 +83,7 @@ export function CustomCursor() {
         }}
         animate={{
           opacity: isHidden ? 0 : 1,
-          scale: isHover ? 1.4 : 1,
+          scale: isHover ? 1.35 : 1,
         }}
         transition={{ duration: 0.2 }}
         className="fixed top-0 left-0"

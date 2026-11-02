@@ -46,15 +46,15 @@ export const SPRINGS = {
   },
   cursorFollower: {
     type: "spring" as const,
-    stiffness: 280,
-    damping: 24,
-    mass: 0.2,
+    stiffness: 400,
+    damping: 32,
+    mass: 0.1,
   },
   cursorDot: {
     type: "spring" as const,
-    stiffness: 700,
-    damping: 38,
-    mass: 0.05,
+    stiffness: 1000,
+    damping: 50,
+    mass: 0.02,
   },
   gentle: {
     type: "spring" as const,
